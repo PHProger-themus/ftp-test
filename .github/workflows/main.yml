@@ -1,0 +1,23 @@
+#name: CI
+#
+on: [workflow_dispatch]
+name: 🚀 Deploy
+jobs:
+  web-deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+    - name: Get latest code
+      uses: actions/checkout@v3
+    
+    - name: Sync files
+      uses: kevinpainchaud/simple-ftp-deploy-action@v1.2.1
+      with:
+        ftp_host: ${{ secrets.HOST }}
+        ftp_username: ${{ secrets.USERNAME }}
+        ftp_password: ${{ secrets.PASSWORD }}
+        local_source_dir: ""
+        dist_target_dir: ""
+        delete: "true"
+        only_newer: "true"
+        exclude: "'^logs/' '^README.md'"
