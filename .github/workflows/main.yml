@@ -11,10 +11,9 @@ jobs:
       uses: actions/checkout@v3
     
     - name: Sync files
-      uses: genietim/ftp-action@releases/v4.0.1
+      uses: appleboy/ssh-action@v1.0.3
       with:
         host: ${{ secrets.HOST }}
-        user: ${{ secrets.USERNAME }}
+        username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
-        localDir: ""
-        remoteDir: ""
+        script: whoami
