@@ -12,12 +12,18 @@ jobs:
     
     - name: Sync files
       uses: kevinpainchaud/simple-ftp-deploy-action@v1.2.1
+      env:
+        INPUT_FTP_HOST: ${{ secrets.HOST }}
+        INPUT_FTP_USERNAME: ${{ secrets.USERNAME }}
+        INPUT_FTP_PASSWORD: ${{ secrets.PASSWORD }}
+        INPUT_LOCAL_SOURCE_DIR: ""
+        INPUT_DIST_TARGET_DIR: ""
+        INPUT_DELETE: "true"
+        INPUT_ONLY_NEWER: "true"
+        INPUT_EXCLUDE: "'^logs/' '^README.md'"
       with:
         ftp_host: ${{ secrets.HOST }}
         ftp_username: ${{ secrets.USERNAME }}
         ftp_password: ${{ secrets.PASSWORD }}
         local_source_dir: ""
         dist_target_dir: ""
-        delete: "true"
-        only_newer: "true"
-        exclude: "'^logs/' '^README.md'"
